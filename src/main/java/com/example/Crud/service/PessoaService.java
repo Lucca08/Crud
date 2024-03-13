@@ -1,5 +1,7 @@
 package com.example.Crud.service;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import java.util.Optional;
@@ -84,17 +86,28 @@ public class PessoaService {
         .orElseThrow(() -> new RuntimeException(PESSOA_NAO_ENCONTRADA));
     }
 
- 
+     public int calcularIdade(Pessoa pessoa) {
+        LocalDate dataNascimento = LocalDate.parse(pessoa.getDataNascimento());
+        LocalDate dataAtual = LocalDate.now();
+        return Period.between(dataNascimento, dataAtual).getYears();
+    }
 
+    @Transactional
+    public Pessoa verIdadPessoa(Long pessoaId) {
+        logger.info("Verificando idade da pessoa com ID: " + pessoaId);
+        Optional<Pessoa> pessoaOptional = pessoaRepository.findById(pessoaId);
+        return pessoaOptional.map(pessoa -> {
+            LocalDate dataNascimento = LocalDate.parse(pessoa.getDataNascimento());
+            int idade = calcularIdade(dataNascimento);
+            pessoa.setDataNascimento(String.valueOf(idade));
+            return pessoaRepository.save(pessoa);
+        }).orElseThrow(() -> new RuntimeException(PESSOA_NAO_ENCONTRADA));
+    }
 
-  
+    private int calcularIdade(LocalDate dataNascimento) {
+        LocalDate dataAtual = LocalDate.now();
+        return Period.between(dataNascimento, dataAtual).getYears();
+    }
 
-  
-    
-
-
-
-
-
-
+        
 }
