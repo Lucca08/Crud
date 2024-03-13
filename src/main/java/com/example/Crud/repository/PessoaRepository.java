@@ -18,6 +18,8 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
 
     List<Pessoa> findByDataNascimento(String dataNascimento);
 
+    boolean existsByCpf(String cpf);
+
 
 }
 

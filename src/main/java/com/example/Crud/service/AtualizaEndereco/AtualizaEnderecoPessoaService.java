@@ -1,4 +1,4 @@
-package com.example.Crud.service;
+package com.example.Crud.service.AtualizaEndereco;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +13,7 @@ import com.example.Crud.repository.PessoaRepository;
 
 import jakarta.transaction.Transactional;
 
+
 @Service
 public class AtualizaEnderecoPessoaService {
 
@@ -25,12 +26,16 @@ public class AtualizaEnderecoPessoaService {
 
     @Transactional
     public Pessoa atualizarEnderecoPessoa(Long pessoaId, List<Endereco> novosEnderecos) {
-        logger.info("Atualizando endereços da pessoa com id {}" + pessoaId);
+        if (novosEnderecos == null || novosEnderecos.isEmpty()) {
+            throw new IllegalArgumentException("A lista de novos enderecos nao pode ser nula ou vazia");
+        }
+
+        logger.info("Atualizando endereços da pessoa com ID: " + pessoaId);
         Optional<Pessoa> pessoaOptional = pessoaRepository.findById(pessoaId);
         return pessoaOptional.map(p -> {
             Endereco.removerTodosEnderecosDaPessoa(p);
             p.getEnderecos().addAll(novosEnderecos);
             return pessoaRepository.save(p);
-        }).orElseThrow(() -> new RuntimeException(PESSOA_NAO_ENCONTRADA));
+        }).orElseThrow(() -> new RuntimeException(PESSOA_NAO_ENCONTRADA + " ID: " + pessoaId));
     }
 }

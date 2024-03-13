@@ -1,4 +1,4 @@
-package com.example.Crud.service;
+package com.example.Crud.service.AtualizaPessoa;
 
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -23,13 +23,20 @@ public class AtualizarPessoaService {
 
     @Transactional
     public Pessoa atualizarPessoa(Long pessoaId, Pessoa pessoa) {
-        logger.info("Atualizando pessoa {} com os dados: {}" + pessoaId + pessoa);
+
         Optional<Pessoa> pessoaOptional = pessoaRepository.findById(pessoaId);
-        return pessoaOptional.map(p -> {
+        Pessoa pessoaExistente = pessoaOptional.orElseThrow(() -> new RuntimeException(PESSOA_NAO_ENCONTRADA));
+
+
+        logger.info("Atualizando pessoa " + pessoaId + " com os dados: " + pessoa);
+  
+        pessoaOptional.map(p -> {
             p.setNome(pessoa.getNome());
             p.setDataNascimento(pessoa.getDataNascimento());
             p.setCpf(pessoa.getCpf());
             return pessoaRepository.save(p);
-        }).orElseThrow(() -> new RuntimeException(PESSOA_NAO_ENCONTRADA));
+        });
+
+        return pessoaExistente;
     }
 }
