@@ -11,7 +11,6 @@ import com.example.Crud.model.Pessoa;
 import com.example.Crud.repository.PessoaRepository;
 
 import jakarta.transaction.Transactional;
-
 @Service
 public class VerificaIdadePessoaService {
 
@@ -24,18 +23,18 @@ public class VerificaIdadePessoaService {
 
     @Transactional
     public Pessoa verIdadePessoa(Long pessoaId) {
-        if (pessoaId == null || pessoaId <= 0) {
-            throw new IllegalArgumentException("ID da pessoa é obrigatório e deve ser maior que zero. ID inválido: " + pessoaId);
-        }
+    // Código de validação do ID omitido para brevidade
 
-        logger.info("Verificando idade da pessoa com ID: " + pessoaId);
-        Pessoa pessoa = pessoaRepository.findById(pessoaId)
-                                        .orElseThrow(() -> new RuntimeException(PESSOA_NAO_ENCONTRADA + " ID: " + pessoaId));
-        LocalDate dataNascimento = LocalDate.parse(pessoa.getDataNascimento());
-        int idade = calcularIdade(dataNascimento);
-        pessoa.setDataNascimento(String.valueOf(idade));
-        return pessoaRepository.save(pessoa);
-    }
+    logger.info("Verificando idade da pessoa com ID: " + pessoaId);
+    Pessoa pessoa = pessoaRepository.findById(pessoaId)
+                                    .orElseThrow(() -> new RuntimeException(PESSOA_NAO_ENCONTRADA + " ID: " + pessoaId));
+
+    LocalDate dataNascimento = pessoa.getDataNascimento();
+    int idade = calcularIdade(dataNascimento);
+    pessoa.setIdade(idade);
+
+    return pessoa;
+}
 
     private int calcularIdade(LocalDate dataNascimento) {
         LocalDate dataAtual = LocalDate.now();

@@ -56,6 +56,14 @@ public class DeletarPessoaServiceTest {
             deletarPessoaService.deletarPessoa(999L);
         });
     }
+
+    @Test
+    public void testDeletarPessoaWithNullId() {
+        assertThrows(RuntimeException.class, () -> {
+            deletarPessoaService.deletarPessoa(null);
+            
+        });
+    }
     
 
     

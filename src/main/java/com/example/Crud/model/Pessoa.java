@@ -1,6 +1,4 @@
 package com.example.Crud.model;
-
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import java.util.*;
+import java.time.LocalDate;
 
 @Entity
 public class Pessoa {
@@ -21,7 +20,8 @@ public class Pessoa {
     @NotBlank
     private String nome;// obrigatório
 
-    private String dataNascimento;
+    @NotBlank
+    private LocalDate dataNascimento; // Alterado para LocalDate
 
     @Column(unique = true)
     @NotBlank
@@ -32,10 +32,12 @@ public class Pessoa {
     @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Endereco> enderecos = new ArrayList<>();
 
+    private int idade;
+
     public Pessoa() {
     }
 
-    public Pessoa(String nome, String dataNascimento, String cpf) {
+    public Pessoa(String nome, LocalDate dataNascimento, String cpf) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
@@ -57,12 +59,12 @@ public class Pessoa {
         this.nome = nome;
     }
 
-    public String getDataNascimento() {
-        return dataNascimento;
+    public LocalDate getDataNascimento() {
+        return this.dataNascimento;
     }
 
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setDataNascimento(LocalDate localDate) {
+        this.dataNascimento = localDate;
     }
 
     public String getCpf() {
@@ -81,7 +83,6 @@ public class Pessoa {
         this.enderecos = enderecos;
     }
 
-    
     public Endereco getEnderecoPrincipal() {
         return enderecoPrincipal;
     }
@@ -89,14 +90,17 @@ public class Pessoa {
     public void setEnderecoPrincipal(Endereco enderecoPrincipal) {
         this.enderecoPrincipal = enderecoPrincipal;
     }
-    
 
-   
-    
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
     @Override
     public String toString() {
         return "Pessoa{id=" + id + ", nome='" + nome + "', Data de Nascimento=" + dataNascimento + ", cpf='" + cpf + "'}";
     }
-    
-
 }
