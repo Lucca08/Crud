@@ -27,6 +27,8 @@ public class Pessoa {
     @NotBlank
     private String cpf;// não pode ter dois iguais na base de dados
 
+    private Endereco enderecoPrincipal;
+
     @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Endereco> enderecos = new ArrayList<>();
 
@@ -78,6 +80,16 @@ public class Pessoa {
     public void setEnderecos(List<Endereco> enderecos) {
         this.enderecos = enderecos;
     }
+
+    
+    public Endereco getEnderecoPrincipal() {
+        return enderecoPrincipal;
+    }
+
+    public void setEnderecoPrincipal(Endereco enderecoPrincipal) {
+        this.enderecoPrincipal = enderecoPrincipal;
+    }
+    
 
    
     

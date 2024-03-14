@@ -30,6 +30,10 @@ public class Endereco {
 
     private String cep;
 
+    private String enderecoCompleto;
+
+    private String enderecoPrincipal;
+
     @ManyToOne
     @JoinColumn(name = "pessoa_id")
     private Pessoa pessoa;
@@ -100,6 +104,15 @@ public class Endereco {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    
+    public String getEnderecoCompleto() {
+        return enderecoCompleto;
+    }
+
+    public void setEnderecoCompleto(String enderecoCompleto) {
+        this.enderecoCompleto = enderecoCompleto;
     }
 
     public Pessoa getPessoa() {

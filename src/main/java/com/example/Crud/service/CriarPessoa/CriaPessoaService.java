@@ -23,7 +23,7 @@ public class CriaPessoaService {
     private PessoaRepository pessoaRepository;
 
     @Transactional
-    public Pessoa criaPessoa(Pessoa pessoa, List<Endereco> enderecos) {
+    public Pessoa criaPessoa(Pessoa pessoa, List<Endereco> enderecos, Endereco enderecoPrincipal) {
         if (pessoa.getNome() == null || pessoa.getNome().isEmpty()) {
             throw new IllegalArgumentException("Nome da pessoa e obrigatorio");
         }
@@ -36,7 +36,14 @@ public class CriaPessoaService {
             throw new IllegalArgumentException("Ja existe uma pessoa com o CPF informado");
         }
 
+        if(!enderecos.contains(enderecoPrincipal)){
+            throw new IllegalArgumentException("O endereco principal deve estar na lista de enderecos da pessoa");
+        }
+    
         pessoa.setEnderecos(enderecos);
+        pessoa.setEnderecoPrincipal(enderecoPrincipal);
+
+
         logger.info("Criando pessoa com os dados: " + pessoa);
         return pessoaRepository.save(pessoa);
     }
