@@ -1,4 +1,4 @@
-package com.example.Crud.ServiceTest.VerificaIdadePessoaTest;
+package com.example.Crud.ServiceTest.ServiceTest.VerificaIdadePessoaTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

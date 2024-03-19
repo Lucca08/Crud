@@ -1,6 +1,6 @@
 package com.example.Crud.Stub;
 
-import com.example.Crud.model.Endereco;
+import com.example.crud.model.Endereco;
 
 public class EnderecoStub {
     public static Endereco enderecoTest(){

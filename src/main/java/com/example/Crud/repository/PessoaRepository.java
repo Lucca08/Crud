@@ -1,22 +1,20 @@
-package com.example.Crud.repository;
+package com.example.crud.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-import com.example.Crud.model.Pessoa;
+import com.example.crud.model.Pessoa;
 
+@Repository
 public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
     
     List<Pessoa> findByNome(String nome);
 
     List<Pessoa> findByCpf(String cpf);
 
-    List<Pessoa> findByEmail(String email);
-
-    List<Pessoa> findByTelefone(String telefone);
-
-    List<Pessoa> findByDataNascimento(String dataNascimento);
+    List<Pessoa> findByDataNascimento(LocalDate dataNascimento);
 
     boolean existsByCpf(String cpf);
 

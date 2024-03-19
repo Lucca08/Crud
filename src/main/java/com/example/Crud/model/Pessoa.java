@@ -1,106 +1,55 @@
-package com.example.Crud.model;
+package com.example.crud.model;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
-import java.util.*;
-import java.time.LocalDate;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class Pessoa {
     
+ 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    @Column(name = "nome")
     @NotBlank
-    private String nome;// obrigatório
+    private String nome;
 
-    @NotBlank
-    private LocalDate dataNascimento; // Alterado para LocalDate
+    @Column(name = "data_nascimento", nullable = false)
+    private LocalDate dataNascimento; 
 
     @Column(unique = true)
     @NotBlank
-    private String cpf;// não pode ter dois iguais na base de dados
+    private String cpf;
 
+    @OneToOne
+    @JoinColumn(name = "endereco_principal_id")
     private Endereco enderecoPrincipal;
 
-    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Endereco> enderecos = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    private List<Endereco> enderecos;
 
+    @Column
     private int idade;
-
-    public Pessoa() {
-    }
-
-    public Pessoa(String nome, LocalDate dataNascimento, String cpf) {
-        this.nome = nome;
-        this.dataNascimento = dataNascimento;
-        this.cpf = cpf;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public LocalDate getDataNascimento() {
-        return this.dataNascimento;
-    }
-
-    public void setDataNascimento(LocalDate localDate) {
-        this.dataNascimento = localDate;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public List<Endereco> getEnderecos() {
-        return enderecos;
-    }
-
-    public void setEnderecos(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
-    }
-
-    public Endereco getEnderecoPrincipal() {
-        return enderecoPrincipal;
-    }
-
-    public void setEnderecoPrincipal(Endereco enderecoPrincipal) {
-        this.enderecoPrincipal = enderecoPrincipal;
-    }
-
-    public int getIdade() {
-        return idade;
-    }
-
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
-    @Override
-    public String toString() {
-        return "Pessoa{id=" + id + ", nome='" + nome + "', Data de Nascimento=" + dataNascimento + ", cpf='" + cpf + "'}";
-    }
 }

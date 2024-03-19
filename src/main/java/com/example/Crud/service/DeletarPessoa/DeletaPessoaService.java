@@ -1,4 +1,4 @@
-package com.example.Crud.service.DeletarPessoa;
+package com.example.crud.service.DeletarPessoa;
 
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -6,8 +6,8 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.Crud.model.Pessoa;
-import com.example.Crud.repository.PessoaRepository;
+import com.example.crud.model.Pessoa;
+import com.example.crud.repository.PessoaRepository;
 
 import jakarta.transaction.Transactional;
 

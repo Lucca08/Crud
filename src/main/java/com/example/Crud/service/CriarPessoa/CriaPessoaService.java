@@ -1,4 +1,4 @@
-package com.example.Crud.service.CriarPessoa;
+package com.example.crud.service.CriarPessoa;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -6,11 +6,11 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.event.TransactionalEventListener;
 
-import com.example.Crud.model.Endereco;
-import com.example.Crud.model.Pessoa;
-import com.example.Crud.repository.PessoaRepository;
+import com.example.crud.model.Endereco;
+import com.example.crud.model.Pessoa;
+import com.example.crud.repository.PessoaRepository;
+
 
 
 
@@ -23,7 +23,7 @@ public class CriaPessoaService {
     private PessoaRepository pessoaRepository;
 
     @Transactional
-    public Pessoa criaPessoa(Pessoa pessoa, List<Endereco> enderecos, Endereco enderecoPrincipal) {
+    public Pessoa criaPessoa(Pessoa pessoa) {
         if (pessoa.getNome() == null || pessoa.getNome().isEmpty()) {
             throw new IllegalArgumentException("Nome da pessoa e obrigatorio");
         }
@@ -36,12 +36,12 @@ public class CriaPessoaService {
             throw new IllegalArgumentException("Ja existe uma pessoa com o CPF informado");
         }
 
-        if(!enderecos.contains(enderecoPrincipal)){
-            throw new IllegalArgumentException("O endereco principal deve estar na lista de enderecos da pessoa");
-        }
+        // if(!enderecos.contains(enderecoPrincipal)){
+        //     throw new IllegalArgumentException("O endereco principal deve estar na lista de enderecos da pessoa");
+        // }
     
-        pessoa.setEnderecos(enderecos);
-        pessoa.setEnderecoPrincipal(enderecoPrincipal);
+        // pessoa.setEnderecos(enderecos);
+        // pessoa.setEnderecoPrincipal(enderecoPrincipal);
 
 
         logger.info("Criando pessoa com os dados: " + pessoa);

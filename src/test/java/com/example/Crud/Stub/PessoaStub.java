@@ -1,12 +1,13 @@
 package com.example.Crud.Stub;
 
-import com.example.Crud.model.Pessoa;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import org.springframework.boot.autoconfigure.web.format.DateTimeFormatters;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.datetime.DateTimeFormatAnnotationFormatterFactory;
+
+import com.example.crud.model.Pessoa;
 public class PessoaStub {
     public static Pessoa pessoaTest(){
         Pessoa pessoa = new Pessoa();
@@ -51,6 +52,15 @@ public class PessoaStub {
         pessoa.setCpf("24353254325");
         pessoa.setId(4L);
         pessoa.setDataNascimento(LocalDate.of(1990, 12, 12));
+        return pessoa;
+    }
+
+    public static Pessoa pessoaTest6() {
+        Pessoa pessoa = new Pessoa();
+        pessoa.setId(1L);
+        pessoa.setNome("João");
+        pessoa.setDataNascimento(LocalDate.of(1980, 10, 15));
+        pessoa.setCpf("12345678900");
         return pessoa;
     }
     

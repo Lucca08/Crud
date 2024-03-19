@@ -1,4 +1,4 @@
-package com.example.Crud.service.VerificaPessoa;
+package com.example.crud.service.VerificaPessoa;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -7,8 +7,8 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.Crud.model.Pessoa;
-import com.example.Crud.repository.PessoaRepository;
+import com.example.crud.model.Pessoa;
+import com.example.crud.repository.PessoaRepository;
 
 import jakarta.transaction.Transactional;
 @Service
@@ -23,7 +23,9 @@ public class VerificaIdadePessoaService {
 
     @Transactional
     public Pessoa verIdadePessoa(Long pessoaId) {
-    // Código de validação do ID omitido para brevidade
+    if (pessoaId == null || pessoaId <= 0) {
+             throw new IllegalArgumentException("Id da pessoa e obrigatorio e deve ser maior que zero, id invalido: " + pessoaId);
+    }
 
     logger.info("Verificando idade da pessoa com ID: " + pessoaId);
     Pessoa pessoa = pessoaRepository.findById(pessoaId)

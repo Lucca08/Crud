@@ -1,5 +1,4 @@
-package com.example.Crud.ServiceTest.DeletarPessoaServiceTest;
-
+package com.example.Crud.ServiceTest.ServiceTest.DeletarPessoaServiceTest;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;

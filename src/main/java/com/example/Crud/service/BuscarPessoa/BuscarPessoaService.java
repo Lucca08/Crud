@@ -1,4 +1,4 @@
-package com.example.Crud.service.BuscarPessoa;
+package com.example.crud.service.BuscarPessoa;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -6,8 +6,10 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.Crud.model.Pessoa;
-import com.example.Crud.repository.PessoaRepository;
+import com.example.crud.model.Pessoa;
+import com.example.crud.repository.PessoaRepository;
+
+
 
 @Service
 public class BuscarPessoaService {

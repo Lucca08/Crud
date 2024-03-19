@@ -1,4 +1,4 @@
-package com.example.Crud.ServiceTest.CriaPessoaServiceTest;
+package com.example.Crud.ServiceTest.ServiceTest.CriaPessoaServiceTest;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;

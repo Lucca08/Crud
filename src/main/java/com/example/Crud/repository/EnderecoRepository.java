@@ -1,10 +1,12 @@
-package com.example.Crud.repository;
+package com.example.crud.repository;
 
 import java.util.List; 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import com.example.Crud.model.Endereco;
+import com.example.crud.model.Endereco;
 
+@Repository
 public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
 
     List<Endereco> findByCep(String cep);
