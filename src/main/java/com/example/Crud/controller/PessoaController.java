@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.crud.dto.CriaPessoaDTO;
 import com.example.crud.model.Pessoa;
 import com.example.crud.service.AtualizaPessoa.AtualizarPessoaService;
 import com.example.crud.service.BuscarPessoa.BuscarPessoaService;
@@ -34,8 +35,9 @@ public class PessoaController {
     private VerificaIdadePessoaService verificaIdadePessoaService;
 
     @PostMapping
-    public ResponseEntity<Pessoa> criaPessoa(@RequestBody Pessoa pessoa) {
-        Pessoa createdPessoa = criarPessoaService.criaPessoa(pessoa);
+    public ResponseEntity<Pessoa> criaPessoa(@RequestBody CriaPessoaDTO pessoaDTO) {
+
+        Pessoa createdPessoa = criarPessoaService.criaPessoa(pessoaDTO);
         return new ResponseEntity<>(createdPessoa, HttpStatus.CREATED);
     }
 

@@ -1,7 +1,10 @@
 package com.example.crud.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+
+import com.example.crud.dto.CriaPessoaDTO;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -11,12 +14,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+@NoArgsConstructor
 @Entity
 @Getter
 @Setter
@@ -38,14 +43,24 @@ public class Pessoa {
     @NotBlank
     private String cpf;
 
-    @OneToOne
-    @JoinColumn(name = "endereco_principal_id")
-    private Endereco enderecoPrincipal;
-
-    
-    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @JoinTable(name = "tb_pessoa_endereco", joinColumns = @JoinColumn(name = "pessoa_id"), inverseJoinColumns = @JoinColumn(name = "endereco_id"))
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Endereco> enderecos;
 
     @Column
     private int idade;
+
+
+    public Pessoa(CriaPessoaDTO pessoaDTO){
+        this.nome = pessoaDTO.getNome();
+        this.cpf = pessoaDTO.getCpf();
+        this.dataNascimento = pessoaDTO.getDataNascimento();
+        this.idade = pessoaDTO.getIdade();
+        this.enderecos = new ArrayList<Endereco>();
+
+    }
+
+    public void adicionaEndereco(Endereco endereco){
+        this.enderecos.add(endereco);
+    }
 }

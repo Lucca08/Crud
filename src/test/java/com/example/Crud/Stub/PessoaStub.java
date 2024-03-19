@@ -59,6 +59,15 @@ public class PessoaStub {
         pessoa.setCpf("12345678900");
         return pessoa;
     }
+
+    public static Pessoa criPessoaDto() {
+        Pessoa pessoa = new Pessoa();
+        pessoa.setId(1L);
+        pessoa.setNome("João");
+        pessoa.setDataNascimento(LocalDate.of(1980, 10, 15));
+        pessoa.setCpf("12345678900");
+        return pessoa;
+    }
     
 
 
