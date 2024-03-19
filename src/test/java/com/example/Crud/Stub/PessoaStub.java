@@ -1,11 +1,7 @@
 package com.example.Crud.Stub;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
-import org.springframework.boot.autoconfigure.web.format.DateTimeFormatters;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.datetime.DateTimeFormatAnnotationFormatterFactory;
 
 import com.example.crud.model.Pessoa;
 public class PessoaStub {
